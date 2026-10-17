@@ -1,10 +1,280 @@
-/**app.wxss**/
-.container {
-  height: 100%;
+/* app.wxss —— 色系参考「古德墨柠」：墨绿 + 暖白 + 墨色
+ * 间距/字号沿用 Apple HIG（iPhone pt ×2 = rpx）
+ * 所有承载文字的颜色均已按 WCAG AA 4.5:1 校验；仅装饰性色块用浅色 */
+page {
+  /* 品牌色：深墨绿承载文字与图标，浅墨绿只做装饰 */
+  --tint: #4F7261;                       /* 5.37:1 on white */
+  --tint-soft: rgba(79, 114, 97, 0.12);
+  --sage: #7C9E8A;                       /* 仅装饰 */
+  --sage-soft: rgba(124, 158, 138, 0.16);
+  --seal: #C0524A;                       /* 4.62:1 */
+  --orange: #B0762C;                     /* 3.84:1，仅图标 */
+
+  /* 语义色 */
+  --income: #35784F;                     /* 5.31:1 */
+  --expense: #B04A3E;                    /* 5.39:1 */
+
+  /* 背景与前景 */
+  --bg: #F7F6F2;
+  --card: #FFFFFF;
+  --ink: #2B2B2B;
+  --label: #2B2B2B;
+  --label-2: #64645F;                    /* 5.95:1，辅助文字 */
+  --label-3: #8A867C;                    /* 3.5:1，箭头等非文字控件 */
+  --separator: #EAE7DF;
+  --border: #EAE7DF;
+  --fill: #F1EFEA;
+
+  /* 间距节奏 4/8rpx 递增 */
+  --gap-xs: 8rpx;
+  --gap-sm: 16rpx;
+  --gap-md: 24rpx;
+  --gap-lg: 32rpx;
+
+  /* 圆角与图标尺寸 token */
+  --radius-card: 16rpx;
+  --radius-group: 20rpx;
+  --icon-sm: 40rpx;
+  --icon-md: 48rpx;
+  --icon-lg: 96rpx;
+  --icon-xl: 132rpx;
+
+  background: var(--bg);
+  color: var(--label);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 34rpx;
+  line-height: 44rpx;
+}
+
+/* 字号阶梯 */
+.large-title { font-size: 68rpx; line-height: 82rpx; font-weight: 700; }
+.headline    { font-size: 34rpx; line-height: 44rpx; font-weight: 600; }
+.subhead     { font-size: 30rpx; line-height: 40rpx; }
+.footnote    { font-size: 26rpx; line-height: 36rpx; color: var(--label-2); }
+.caption     { font-size: 24rpx; line-height: 32rpx; color: var(--label-2); }
+
+/* 宋体标题，贴合参考图的中式书卷感 */
+.ink-title {
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", "Source Han Serif SC", serif;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24rpx 32rpx 220rpx;
+}
+
+/* ---------- 图标系统：一套线性 SVG，蒙版上色，尺寸走 token ---------- */
+.icon {
+  flex: none;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  background-color: var(--label-2);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+}
+
+.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+.icon-lg { width: var(--icon-lg); height: var(--icon-lg); }
+.icon-xl { width: var(--icon-xl); height: var(--icon-xl); }
+
+.c-sage   { background-color: var(--tint); }
+.c-orange { background-color: var(--orange); }
+.c-seal   { background-color: var(--seal); }
+.c-ink    { background-color: var(--ink); }
+.c-muted  { background-color: var(--label-3); }
+
+/* 记账：圆角钱包 + 小闪光 */
+.i-ledger {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='7' width='17.2' height='12' rx='3.2'/%3E%3Cpath d='M15 13h2'/%3E%3Cpath d='M18.6 3.4v2.2M17.5 4.5h2.2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='7' width='17.2' height='12' rx='3.2'/%3E%3Cpath d='M15 13h2'/%3E%3Cpath d='M18.6 3.4v2.2M17.5 4.5h2.2'/%3E%3C/svg%3E");
+}
+
+/* 用餐：冒热气的圆碗 */
+.i-meal {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11.6h16a8 8 0 0 1-16 0Z'/%3E%3Cpath d='M9 8.6c0-1.2 1.2-1.7 1.2-2.9M13.4 8.6c0-1.2 1.2-1.7 1.2-2.9'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11.6h16a8 8 0 0 1-16 0Z'/%3E%3Cpath d='M9 8.6c0-1.2 1.2-1.7 1.2-2.9M13.4 8.6c0-1.2 1.2-1.7 1.2-2.9'/%3E%3C/svg%3E");
+}
+
+/* 彩券：带虚线的票根 + 中奖闪星 */
+.i-lottery {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='7' width='17.2' height='10' rx='2.8'/%3E%3Cpath d='M14.8 7.6v8.8' stroke-dasharray='1.6 2.4'/%3E%3Cpath d='M8.7 9.8l.9 1.8 1.8.9-1.8.9-.9 1.8-.9-1.8-1.8-.9 1.8-.9.9-1.8Z' fill='%23000' stroke-width='0.6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='7' width='17.2' height='10' rx='2.8'/%3E%3Cpath d='M14.8 7.6v8.8' stroke-dasharray='1.6 2.4'/%3E%3Cpath d='M8.7 9.8l.9 1.8 1.8.9-1.8.9-.9 1.8-.9-1.8-1.8-.9 1.8-.9.9-1.8Z' fill='%23000' stroke-width='0.6'/%3E%3C/svg%3E");
+}
+
+/* ---------- 分组列表（inset grouped） ---------- */
+.group {
+  margin-bottom: var(--gap-lg);
+  border-radius: var(--radius-group);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.group-header,
+.group-footer {
+  padding: 0 var(--gap-sm) 12rpx;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: var(--label-2);
+}
+
+.group-footer {
+  padding: 12rpx var(--gap-sm) 0;
+  margin-bottom: var(--gap-lg);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 88rpx;                     /* 44pt 最小点击高度 */
+  padding: 20rpx var(--gap-lg);
+}
+
+.row + .row {
+  border-top: 1rpx solid var(--separator);
+}
+
+.row-title {
+  flex: 1;
+  font-size: 34rpx;
+}
+
+.row-value {
+  font-size: 34rpx;
+  color: var(--label-2);
+}
+
+.row-empty {
+  justify-content: center;
+  color: var(--label-2);
+}
+
+.chevron {
+  margin-left: 12rpx;
+  font-size: 38rpx;
+  line-height: 1;
+  color: var(--label-3);
+}
+
+/* 列表左侧图标块：44pt 命中区 */
+.tile {
+  flex: none;
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22rpx;
+  background: var(--fill);
+}
+
+.tile-ledger { background: var(--tint-soft); }
+.tile-meal   { background: rgba(176, 118, 44, 0.14); }
+.tile-lottery { background: rgba(192, 82, 74, 0.12); }
+
+.badge {
+  flex: none;
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.badge.expense { background: rgba(176, 74, 62, 0.12); color: var(--expense); }
+.badge.income  { background: rgba(53, 120, 79, 0.12); color: var(--income); }
+
+/* 行内两段式文案 */
+.entry-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+
+.entry-title { font-size: 34rpx; line-height: 44rpx; }
+.entry-sub {
+  margin-top: 2rpx;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: var(--label-2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.amount { font-size: 34rpx; font-weight: 600; }
+.amount.expense, .amount-expense { color: var(--expense); }
+.amount.income, .amount-income  { color: var(--income); }
+
+.tag {
+  flex: none;
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--label-2);
+  background: var(--fill);
+}
+
+/* ---------- 按压反馈：不改变布局尺寸，避免抖动 ---------- */
+.pressed {
+  transform: scale(0.97);
+  opacity: 0.72;
+}
+
+.pressable {
+  transition: transform 120ms ease-out, opacity 120ms ease-out;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  border-radius: var(--radius-group);
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.btn-filled { background: var(--tint); color: #FFFFFF; }
+.btn-tinted { background: var(--tint-soft); color: var(--tint); }
+
+/* ---------- 占位页（用餐 / 彩券 尚未开工） ---------- */
+.placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+  padding: 72rpx 48rpx;
+  text-align: center;
+}
+
+.ph-icon {
+  width: 176rpx;
+  height: 176rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--fill);
+}
+
+.ph-title { margin-top: var(--gap-md); font-size: 40rpx; line-height: 48rpx; font-weight: 600; }
+.ph-desc { margin-top: var(--gap-sm); font-size: 30rpx; line-height: 44rpx; color: var(--label-2); }
+.ph-tag {
+  margin-top: var(--gap-lg);
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: var(--tint);
+  background: var(--tint-soft);
+}

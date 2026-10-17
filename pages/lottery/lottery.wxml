@@ -1,0 +1,8 @@
+<view class="page">
+  <view class="placeholder">
+    <view class="ph-icon"><view class="icon i-lottery c-seal icon-lg" aria-hidden="true"></view></view>
+    <text class="ph-title ink-title">彩券</text>
+    <text class="ph-desc">入口先留着。玩法还没定，想清楚要做什么再开工。</text>
+    <view class="ph-tag">建设中</view>
+  </view>
+</view>

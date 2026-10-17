@@ -1,0 +1,61 @@
+.entry-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--gap-md);
+  padding: var(--gap-lg);
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2rpx 12rpx rgba(43, 43, 43, 0.04);
+}
+
+.entry-head {
+  display: flex;
+  align-items: baseline;
+}
+
+.entry-name {
+  font-size: 38rpx;
+  line-height: 52rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+  color: var(--ink);
+}
+
+.entry-en {
+  margin-left: 12rpx;
+  padding-bottom: 2rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  letter-spacing: 3rpx;
+  color: var(--tint);
+  border-bottom: 1rpx solid var(--sage);
+}
+
+.entry-foot {
+  display: flex;
+  align-items: center;
+  margin-top: 6rpx;
+}
+
+.entry-desc {
+  flex: 1;
+  min-width: 0;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: var(--label-2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 插画预留位：放置 /assets/art/*.png 后由 .entry-art 接管右上角 */
+.entry-art {
+  position: absolute;
+  right: var(--gap-md);
+  bottom: 12rpx;
+  width: 128rpx;
+  height: 128rpx;
+  pointer-events: none;
+}

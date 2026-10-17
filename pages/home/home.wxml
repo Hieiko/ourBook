@@ -1,0 +1,68 @@
+<view class="page">
+  <!-- 插画预留位：备好图片后放到 assets/art/ 并在对应卡片内插入
+       <image class="entry-art" src="/assets/art/ledger.png" mode="aspectFit" aria-hidden="true" /> -->
+  <view
+    class="entry-card pressable"
+    hover-class="pressed"
+    hover-stay-time="80"
+    bindtap="goLedger"
+    aria-role="button"
+    aria-label="记账，收支流水、月度汇总、分类排行"
+  >
+    <view class="tile tile-ledger"><view class="icon i-ledger c-sage" aria-hidden="true"></view></view>
+    <view class="entry-body">
+      <view class="entry-head">
+        <text class="entry-name ink-title">记账</text>
+        <text class="entry-en">LEDGER</text>
+      </view>
+      <view class="entry-foot">
+        <text class="entry-desc">收支流水、月度汇总、分类排行</text>
+      </view>
+    </view>
+    <text class="chevron" aria-hidden="true">›</text>
+  </view>
+
+  <view
+    class="entry-card pressable"
+    hover-class="pressed"
+    hover-stay-time="80"
+    bindtap="goMeal"
+    aria-role="button"
+    aria-label="用餐，建设中"
+  >
+    <view class="tile tile-meal"><view class="icon i-meal c-orange" aria-hidden="true"></view></view>
+    <view class="entry-body">
+      <view class="entry-head">
+        <text class="entry-name ink-title">用餐</text>
+        <text class="entry-en">MEAL</text>
+      </view>
+      <view class="entry-foot">
+        <text class="entry-desc">店铺、菜品、照片、花费</text>
+        <view class="tag">建设中</view>
+      </view>
+    </view>
+    <text class="chevron" aria-hidden="true">›</text>
+  </view>
+
+  <view
+    class="entry-card pressable"
+    hover-class="pressed"
+    hover-stay-time="80"
+    bindtap="goLottery"
+    aria-role="button"
+    aria-label="彩券，建设中"
+  >
+    <view class="tile tile-lottery"><view class="icon i-lottery c-seal" aria-hidden="true"></view></view>
+    <view class="entry-body">
+      <view class="entry-head">
+        <text class="entry-name ink-title">彩券</text>
+        <text class="entry-en">LOTTERY</text>
+      </view>
+      <view class="entry-foot">
+        <text class="entry-desc">玩法待定，先留入口</text>
+        <view class="tag">建设中</view>
+      </view>
+    </view>
+    <text class="chevron" aria-hidden="true">›</text>
+  </view>
+</view>

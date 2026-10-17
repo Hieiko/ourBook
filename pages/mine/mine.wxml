@@ -1,0 +1,59 @@
+<view class="page">
+  <view class="large-title">我的</view>
+
+  <view class="group-header">我的记录</view>
+  <view class="group">
+    <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="goLedger" aria-role="button" aria-label="记账记录">
+      <view class="tile tile-ledger"><view class="icon i-ledger c-sage" aria-hidden="true"></view></view>
+      <view class="entry-body">
+        <text class="entry-title">记账记录</text>
+        <text class="entry-sub">收支流水、月度汇总、分类排行</text>
+      </view>
+      <text class="row-value">{{ledgerCount}} 笔</text>
+      <text class="chevron" aria-hidden="true">›</text>
+    </view>
+    <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="goMeal" aria-role="button" aria-label="用餐记录">
+      <view class="tile tile-meal"><view class="icon i-meal c-orange" aria-hidden="true"></view></view>
+      <view class="entry-body">
+        <text class="entry-title">用餐记录</text>
+        <text class="entry-sub">店铺、菜品、照片、花费</text>
+      </view>
+      <text class="row-value">0 条</text>
+      <text class="chevron" aria-hidden="true">›</text>
+    </view>
+    <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="goLottery" aria-role="button" aria-label="彩券">
+      <view class="tile tile-lottery"><view class="icon i-lottery c-seal" aria-hidden="true"></view></view>
+      <view class="entry-body">
+        <text class="entry-title">彩券</text>
+        <text class="entry-sub">玩法待定，先留入口</text>
+      </view>
+      <text class="row-value">建设中</text>
+      <text class="chevron" aria-hidden="true">›</text>
+    </view>
+  </view>
+
+  <view class="group-header">数据</view>
+  <view class="group">
+    <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="exportData" aria-role="button" aria-label="导出备份到剪贴板">
+      <text class="row-title">导出备份</text>
+      <text class="row-value">复制到剪贴板</text>
+    </view>
+    <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="importData" aria-role="button" aria-label="从剪贴板导入备份">
+      <text class="row-title">导入备份</text>
+      <text class="chevron" aria-hidden="true">›</text>
+    </view>
+  </view>
+  <view class="group-footer">数据只存在这台手机里。换手机或清理缓存前，先把备份导出并保存好。</view>
+
+  <view class="group-header">关于</view>
+  <view class="group">
+    <view class="row">
+      <text class="row-title">版本</text>
+      <text class="row-value">1.0.0</text>
+    </view>
+    <view class="row">
+      <text class="row-title">数据存储</text>
+      <text class="row-value">仅本机</text>
+    </view>
+  </view>
+</view>

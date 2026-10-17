@@ -1,0 +1,66 @@
+/* 自定义 tabBar：Apple 系统标签栏（顶部发丝线 + 半透明底） */
+.tabbar {
+  position: fixed;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 90;
+  display: flex;
+  align-items: flex-start;
+  height: calc(98rpx + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box;
+  background: rgba(247, 246, 242, 0.96);
+  border-top: 1rpx solid #EAE7DF;
+}
+
+.tab {
+  flex: 1;
+  height: 98rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 52rpx;
+  height: 52rpx;
+  background-color: #8A867C;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+}
+
+.label {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #64645F;
+}
+
+.tab.on .icon { background-color: #4F7261; }
+.tab.on .label { color: #4F7261; }
+
+.tab {
+  transition: transform 120ms ease-out, opacity 120ms ease-out;
+}
+
+.pressed {
+  transform: scale(0.94);
+  opacity: 0.7;
+}
+
+.icon-home {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.6 12 4l8 6.6V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.4Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.6 12 4l8 6.6V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1v-9.4Z'/%3E%3C/svg%3E");
+}
+
+.icon-mine {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.6'/%3E%3Cpath d='M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.6'/%3E%3Cpath d='M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6'/%3E%3C/svg%3E");
+}

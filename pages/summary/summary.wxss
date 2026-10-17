@@ -1,0 +1,28 @@
+.mom.up { color: var(--expense); }
+.mom.down { color: var(--income); }
+
+.rank { padding: 20rpx 32rpx; }
+.rank + .rank { border-top: 1rpx solid var(--separator); }
+
+.rank-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.rank-name { font-size: 34rpx; }
+.rank-amount { font-size: 30rpx; color: var(--label-2); }
+
+.bar-track {
+  margin-top: 12rpx;
+  height: 12rpx;
+  border-radius: 999rpx;
+  background: var(--fill);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999rpx;
+  background: var(--tint);
+}
