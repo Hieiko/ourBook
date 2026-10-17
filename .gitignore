@@ -1,0 +1,5 @@
+# WeChat mini program
+node_modules/
+miniprogram_npm/
+project.private.config.json
+.DS_Store
