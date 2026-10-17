@@ -115,17 +115,19 @@
     </view>
 
     <view class="amount-row">
-      <text class="cny" aria-hidden="true">￥</text>
-      <input
-        class="amount-field"
-        type="digit"
-        focus="{{focusAmount}}"
-        cursor-spacing="32"
-        placeholder="0.00"
-        value="{{form.amount}}"
-        bindinput="onAmount"
-        aria-label="金额，必填"
-      />
+      <view class="amount-card">
+        <text class="cny" aria-hidden="true">￥</text>
+        <input
+          class="amount-field"
+          type="digit"
+          focus="{{focusAmount}}"
+          cursor-spacing="32"
+          placeholder="0.00"
+          value="{{form.amount}}"
+          bindinput="onAmount"
+          aria-label="金额，必填"
+        />
+      </view>
     </view>
 
     <view class="group">

@@ -163,6 +163,8 @@
 
 .sheet {
   width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
   box-sizing: border-box;
   padding: 8rpx 32rpx calc(32rpx + env(safe-area-inset-bottom));
   background: var(--bg);
@@ -191,28 +193,43 @@
 .amount-row {
   display: flex;
   align-items: center;
-  padding: 8rpx var(--gap-lg) 32rpx;
+  margin-bottom: var(--gap-md);
+}
+
+.amount-card {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 16rpx var(--gap-lg);
+  border-radius: var(--radius-group);
+  background: var(--card);
 }
 
 .cny {
   margin-right: 12rpx;
   font-size: 44rpx;
+  line-height: 60rpx;
   font-weight: 600;
   color: var(--label-2);
 }
 
+/* 小程序 input 不写死高度时，大号字在真机上会被上下裁掉 */
 .amount-field {
   flex: 1;
   min-width: 0;
+  height: 88rpx;
   font-size: 64rpx;
-  line-height: 76rpx;
+  line-height: 88rpx;
   font-weight: 700;
 }
 
 .field-input {
   flex: 1;
   min-width: 0;
+  height: 48rpx;
   font-size: 34rpx;
+  line-height: 48rpx;
   text-align: right;
 }
 
