@@ -1,14 +1,9 @@
 const calc = require('../../utils/calc')
 const store = require('../../utils/store')
 
-const emptyForm = () => ({
-  id: '',
-  type: 'expense',
-  amount: '',
-  category: calc.EXPENSE_CATEGORIES[0],
-  dateStr: calc.dateStr(Date.now()),
-  note: '',
-})
+// 图标网格的数据源：分类名 -> 图标 class
+const cellsOf = type =>
+  calc.categoriesOf(type).map(name => ({ name, icon: calc.CATEGORY_ICON[name] }))
 
 Page({
   data: {
@@ -16,9 +11,11 @@ Page({
     monthLabel: '',
     summary: { expense: '0.00', income: '0.00', balance: '0.00' },
     list: [],
-    categories: calc.EXPENSE_CATEGORIES,
-    form: emptyForm(),
+    type: 'expense',
+    cells: [],
+    form: { id: '', type: 'expense', amount: '', category: '', dateStr: '', note: '' },
     sheetVisible: false,
+    focusAmount: false,
   },
 
   onShow() {
@@ -27,7 +24,7 @@ Page({
   },
 
   refresh() {
-    const { month } = this.data
+    const { month, type } = this.data
     const records = store.ledger.list()
     const sum = calc.summarize(records, month)
     const list = calc
@@ -36,6 +33,8 @@ Page({
         id: record.id,
         type: record.type,
         category: record.category,
+        // 导入的备份可能带旧分类名，兜底成「其他」，避免空白图标
+        icon: calc.CATEGORY_ICON[record.category] || 'i-other',
         note: record.note,
         amountText: calc.formatCents(record.cents),
         dateText: calc.dateStr(record.ts).slice(5),
@@ -49,6 +48,7 @@ Page({
         balance: calc.formatCents(sum.balance),
       },
       list,
+      cells: cellsOf(type),
     })
   },
 
@@ -57,12 +57,31 @@ Page({
     this.setData({ month: calc.shiftMonth(this.data.month, delta) }, () => this.refresh())
   },
 
+  onType(e) {
+    const type = e.currentTarget.dataset.value
+    if (type === this.data.type) return
+    this.setData({ type, cells: cellsOf(type) })
+  },
+
   openSummary() {
     wx.navigateTo({ url: `/pages/summary/summary?month=${this.data.month}` })
   },
 
-  openNew() {
-    this.setData({ sheetVisible: true, categories: calc.EXPENSE_CATEGORIES, form: emptyForm() })
+  // 点图标 = 直接记一笔，只问金额和备注
+  pick(e) {
+    const category = e.currentTarget.dataset.name
+    this.setData({
+      sheetVisible: true,
+      focusAmount: true,
+      form: {
+        id: '',
+        type: this.data.type,
+        amount: '',
+        category,
+        dateStr: calc.dateStr(Date.now()),
+        note: '',
+      },
+    })
   },
 
   openEdit(e) {
@@ -71,7 +90,7 @@ Page({
     if (!record) return
     this.setData({
       sheetVisible: true,
-      categories: record.type === 'income' ? calc.INCOME_CATEGORIES : calc.EXPENSE_CATEGORIES,
+      focusAmount: false,
       form: {
         id: record.id,
         type: record.type,
@@ -84,17 +103,10 @@ Page({
   },
 
   closeSheet() {
-    this.setData({ sheetVisible: false })
+    this.setData({ sheetVisible: false, focusAmount: false })
   },
 
   noop() {},
-
-  onType(e) {
-    const type = e.currentTarget.dataset.value
-    if (type === this.data.form.type) return
-    const categories = type === 'income' ? calc.INCOME_CATEGORIES : calc.EXPENSE_CATEGORIES
-    this.setData({ categories, 'form.type': type, 'form.category': categories[0] })
-  },
 
   onAmount(e) {
     this.setData({ 'form.amount': e.detail.value })
@@ -108,15 +120,11 @@ Page({
     this.setData({ 'form.dateStr': e.detail.value })
   },
 
-  onCategory(e) {
-    this.setData({ 'form.category': e.currentTarget.dataset.value })
-  },
-
   save() {
     const form = this.data.form
     const cents = calc.toCents(form.amount)
     if (cents === null || cents <= 0) {
-      wx.showToast({ title: '请输入正确金额', icon: 'none' })
+      wx.showToast({ title: '请输入金额', icon: 'none' })
       return
     }
 
@@ -131,8 +139,11 @@ Page({
     if (form.id) store.ledger.update(form.id, payload)
     else store.ledger.add(Object.assign({ id: store.genId(), createdAt: Date.now() }, payload))
 
-    this.setData({ sheetVisible: false })
-    this.refresh()
+    // 跳到这笔所属月份：改了日期或记的是上个月时，不至于「记完了却看不见」
+    this.setData(
+      { sheetVisible: false, focusAmount: false, month: calc.monthOf(payload.ts) },
+      () => this.refresh()
+    )
   },
 
   removeCurrent() {
@@ -143,7 +154,7 @@ Page({
       success: res => {
         if (!res.confirm) return
         store.ledger.remove(id)
-        this.setData({ sheetVisible: false })
+        this.setData({ sheetVisible: false, focusAmount: false })
         this.refresh()
       },
     })

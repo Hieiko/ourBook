@@ -21,29 +21,62 @@
     >›</view>
   </view>
 
-  <view class="group">
-    <view class="row">
-      <text class="row-title">本月结余</text>
-      <text class="balance-value">{{summary.balance}}</text>
+  <view
+    class="summary pressable"
+    hover-class="pressed"
+    hover-stay-time="80"
+    bindtap="openSummary"
+    aria-role="button"
+    aria-label="本月支出 {{summary.expense}} 元，收入 {{summary.income}} 元，查看分类汇总"
+  >
+    <view class="summary-main">
+      <text class="summary-label">本月结余</text>
+      <text class="summary-balance">{{summary.balance}}</text>
     </view>
-    <view class="row">
-      <text class="row-title">支出</text>
-      <text class="row-value amount-expense">{{summary.expense}}</text>
+    <view class="summary-side">
+      <view class="summary-line">
+        <text class="summary-key">支出</text>
+        <text class="amount-expense">{{summary.expense}}</text>
+      </view>
+      <view class="summary-line">
+        <text class="summary-key">收入</text>
+        <text class="amount-income">{{summary.income}}</text>
+      </view>
     </view>
-    <view class="row">
-      <text class="row-title">收入</text>
-      <text class="row-value amount-income">{{summary.income}}</text>
-    </view>
+    <text class="chevron" aria-hidden="true">›</text>
+  </view>
+
+  <view class="seg">
     <view
-      class="row pressable"
+      class="seg-item {{type === 'expense' ? 'on' : ''}}"
+      data-value="expense"
+      bindtap="onType"
+      aria-role="radio"
+      aria-checked="{{type === 'expense'}}"
+    >支出</view>
+    <view
+      class="seg-item {{type === 'income' ? 'on' : ''}}"
+      data-value="income"
+      bindtap="onType"
+      aria-role="radio"
+      aria-checked="{{type === 'income'}}"
+    >收入</view>
+  </view>
+
+  <view class="grid {{type}}">
+    <view
+      wx:for="{{cells}}"
+      wx:key="name"
+      class="cell pressable"
       hover-class="pressed"
       hover-stay-time="80"
-      bindtap="openSummary"
+      data-name="{{item.name}}"
+      bindtap="pick"
       aria-role="button"
-      aria-label="查看支出分类排行"
+      aria-label="记一笔{{item.name}}"
     >
-      <text class="row-title">分类汇总</text>
-      <text class="row-value row-link">查看排行 ›</text>
+      <view class="cell-tile"><view class="icon icon-lg {{item.icon}}" aria-hidden="true"></view></view>
+      <text class="cell-name">{{item.name}}</text>
     </view>
   </view>
 
@@ -59,9 +92,9 @@
       data-id="{{item.id}}"
       bindtap="openEdit"
       aria-role="button"
-      aria-label="{{item.category}}{{item.type === 'income' ? '收入' : '支出'}} {{item.amountText}}，点击编辑"
+      aria-label="{{item.category}}{{item.type === 'income' ? '收入' : '支出'}} {{item.amountText}} 元，点击编辑"
     >
-      <view class="badge {{item.type}}" aria-hidden="true">{{item.type === 'income' ? '收' : '支'}}</view>
+      <view class="tile {{item.type}}"><view class="icon {{item.icon}}" aria-hidden="true"></view></view>
       <view class="entry-body">
         <text class="entry-title">{{item.category}}</text>
         <text class="entry-sub">{{item.dateText}}{{item.note ? ' · ' + item.note : ''}}</text>
@@ -69,15 +102,6 @@
       <text class="amount {{item.type}}">{{item.type === 'income' ? '+' : '-'}}{{item.amountText}}</text>
     </view>
   </view>
-
-  <view
-    class="fab pressable"
-    hover-class="pressed"
-    hover-stay-time="80"
-    bindtap="openNew"
-    aria-role="button"
-    aria-label="记一笔"
-  >＋</view>
 </view>
 
 <view wx:if="{{sheetVisible}}" class="mask" bindtap="closeSheet">
@@ -86,56 +110,40 @@
 
     <view class="sheet-head">
       <text class="sheet-cancel pressable" hover-class="pressed" hover-stay-time="80" bindtap="closeSheet" aria-role="button">取消</text>
-      <text class="sheet-title">{{form.id ? '编辑记录' : '记一笔'}}</text>
+      <text class="sheet-title">{{form.id ? '编辑记录' : form.category}}</text>
       <text class="sheet-done pressable" hover-class="pressed" hover-stay-time="80" bindtap="save" aria-role="button">保存</text>
     </view>
 
-    <view class="seg">
-      <view
-        class="seg-item {{form.type === 'expense' ? 'on' : ''}}"
-        data-value="expense"
-        bindtap="onType"
-        aria-role="radio"
-        aria-checked="{{form.type === 'expense'}}"
-      >支出</view>
-      <view
-        class="seg-item {{form.type === 'income' ? 'on' : ''}}"
-        data-value="income"
-        bindtap="onType"
-        aria-role="radio"
-        aria-checked="{{form.type === 'income'}}"
-      >收入</view>
+    <view class="amount-row">
+      <text class="cny" aria-hidden="true">￥</text>
+      <input
+        class="amount-field"
+        type="digit"
+        focus="{{focusAmount}}"
+        cursor-spacing="32"
+        placeholder="0.00"
+        value="{{form.amount}}"
+        bindinput="onAmount"
+        aria-label="金额，必填"
+      />
     </view>
 
     <view class="group">
       <view class="row">
-        <text class="row-title">金额</text>
-        <input class="field-input amount-input" type="digit" placeholder="0.00" value="{{form.amount}}" bindinput="onAmount" aria-label="金额" />
+        <text class="row-title">备注</text>
+        <input
+          class="field-input"
+          placeholder="选填"
+          value="{{form.note}}"
+          bindinput="onNote"
+          aria-label="备注，选填"
+        />
       </view>
       <view class="row">
         <text class="row-title">日期</text>
         <picker mode="date" value="{{form.dateStr}}" bindchange="onDate" aria-label="选择日期">
           <view class="row-value">{{form.dateStr}}</view>
         </picker>
-      </view>
-      <view class="row">
-        <text class="row-title">备注</text>
-        <input class="field-input note-input" placeholder="选填" value="{{form.note}}" bindinput="onNote" aria-label="备注" />
-      </view>
-    </view>
-
-    <view class="group-header">分类</view>
-    <view class="group">
-      <view class="chips">
-        <view
-          wx:for="{{categories}}"
-          wx:key="*this"
-          class="chip {{form.category === item ? 'on' : ''}}"
-          data-value="{{item}}"
-          bindtap="onCategory"
-          aria-role="radio"
-          aria-checked="{{form.category === item}}"
-        >{{item}}</view>
       </view>
     </view>
 

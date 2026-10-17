@@ -1,8 +1,13 @@
+/* 记账页没有底栏，收掉 app.wxss 给 tab 页留的那截空白 */
+.page {
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+
 .month-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 24rpx;
+  margin-bottom: var(--gap-sm);
 }
 
 .month-nav {
@@ -23,28 +28,127 @@
   font-weight: 600;
 }
 
-.balance-value {
-  font-size: 44rpx;
+/* ---------- 汇总卡：结余为主，收支为辅 ---------- */
+.summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--gap-md);
+  padding: 26rpx var(--gap-lg);
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--card);
+}
+
+.summary-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-label {
+  display: block;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color: var(--label-2);
+}
+
+.summary-balance {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 54rpx;
+  line-height: 66rpx;
   font-weight: 600;
 }
 
-.fab {
-  position: fixed;
-  right: 32rpx;
-  bottom: calc(48rpx + env(safe-area-inset-bottom));
-  width: 112rpx;
-  height: 112rpx;
+.summary-side {
+  flex: none;
+  text-align: right;
+}
+
+.summary-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  font-size: 28rpx;
+  line-height: 42rpx;
+}
+
+.summary-key {
+  margin-right: 12rpx;
+  color: var(--label-2);
+}
+
+/* ---------- 支出 / 收入 切换 ---------- */
+.seg {
+  display: flex;
+  margin-bottom: var(--gap-sm);
+  padding: 4rpx;
+  border-radius: 18rpx;
+  background: var(--fill);
+}
+
+.seg-item {
+  flex: 1;
+  min-height: 64rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 56rpx;
-  line-height: 1;
-  color: #FFFFFF;
-  border-radius: 50%;
-  background: var(--tint);
-  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.18);
+  border-radius: 14rpx;
+  font-size: 30rpx;
 }
 
+.seg-item.on {
+  background: var(--card);
+  font-weight: 600;
+  box-shadow: 0 3rpx 8rpx rgba(43, 43, 43, 0.1);
+}
+
+/* ---------- icon 网格：一屏点选，点谁记谁 ---------- */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--gap-lg);
+}
+
+.cell {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18rpx 0;
+}
+
+.cell-tile {
+  width: 128rpx;
+  height: 128rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--tint-soft);
+}
+
+.cell-name {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: var(--label-2);
+}
+
+.grid.expense .icon { background-color: var(--tint); }
+.grid.income .cell-tile { background: rgba(53, 120, 79, 0.12); }
+.grid.income .icon { background-color: var(--income); }
+
+/* 记录行：分类图标沿用圆形底 */
+.tile {
+  border-radius: 50%;
+}
+
+.tile.expense { background: var(--tint-soft); }
+.tile.expense .icon { background-color: var(--tint); }
+.tile.income { background: rgba(53, 120, 79, 0.12); }
+.tile.income .icon { background-color: var(--income); }
+
+/* ---------- 金额弹层 ---------- */
 .mask {
   position: fixed;
   top: 0;
@@ -59,12 +163,10 @@
 
 .sheet {
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
   box-sizing: border-box;
   padding: 8rpx 32rpx calc(32rpx + env(safe-area-inset-bottom));
   background: var(--bg);
-  border-radius: 20rpx 20rpx 0 0;
+  border-radius: 32rpx 32rpx 0 0;
 }
 
 .grabber {
@@ -86,63 +188,36 @@
 .sheet-cancel { font-size: 34rpx; color: var(--tint); }
 .sheet-done { font-size: 34rpx; font-weight: 600; color: var(--tint); }
 
-.seg {
-  display: flex;
-  margin-bottom: 32rpx;
-  padding: 4rpx;
-  border-radius: 18rpx;
-  background: var(--fill);
-}
-
-.seg-item {
-  flex: 1;
-  min-height: 64rpx;
+.amount-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 14rpx;
-  font-size: 30rpx;
+  padding: 8rpx var(--gap-lg) 32rpx;
 }
 
-.seg-item.on {
-  background: #FFFFFF;
+.cny {
+  margin-right: 12rpx;
+  font-size: 44rpx;
   font-weight: 600;
-  box-shadow: 0 3rpx 8rpx rgba(0, 0, 0, 0.12), 0 1rpx 1rpx rgba(0, 0, 0, 0.04);
+  color: var(--label-2);
+}
+
+.amount-field {
+  flex: 1;
+  min-width: 0;
+  font-size: 64rpx;
+  line-height: 76rpx;
+  font-weight: 700;
 }
 
 .field-input {
   flex: 1;
+  min-width: 0;
   font-size: 34rpx;
   text-align: right;
 }
 
-.amount-input {
-  font-size: 44rpx;
-  font-weight: 600;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 24rpx 24rpx 8rpx;
-}
-
-.chip {
-  margin: 0 16rpx 16rpx 0;
-  padding: 14rpx 28rpx;
-  border-radius: 999rpx;
-  font-size: 30rpx;
-  background: var(--fill);
-}
-
-.chip.on {
-  background: var(--tint-soft);
-  color: var(--tint);
-  font-weight: 600;
-}
-
 .btn-delete {
   margin-top: 8rpx;
-  background: rgba(194, 94, 82, 0.14);
+  background: rgba(176, 74, 62, 0.12);
   color: var(--expense);
 }

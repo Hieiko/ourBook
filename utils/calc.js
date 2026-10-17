@@ -1,6 +1,27 @@
 // 纯计算逻辑：刻意不引用任何 wx API，这样才能直接跑 tests/calc.test.js
-const EXPENSE_CATEGORIES = ['餐饮', '交通', '购物', '居家', '医疗', '教育', '娱乐', '人情', '其他']
+const EXPENSE_CATEGORIES = ['餐饮', '买菜', '零食', '交通', '购物', '居家', '房租', '医疗', '教育', '娱乐', '人情', '其他']
 const INCOME_CATEGORIES = ['工资', '奖金', '红包', '其他']
+
+// 分类 -> 图标 class（图标本体在 app.wxss，蒙版上色）
+const CATEGORY_ICON = {
+  餐饮: 'i-food',
+  买菜: 'i-veggie',
+  零食: 'i-snack',
+  交通: 'i-transit',
+  购物: 'i-bag',
+  居家: 'i-home',
+  房租: 'i-key',
+  医疗: 'i-med',
+  教育: 'i-book',
+  娱乐: 'i-fun',
+  人情: 'i-gift',
+  工资: 'i-salary',
+  奖金: 'i-bonus',
+  红包: 'i-redpacket',
+  其他: 'i-other',
+}
+
+const categoriesOf = type => (type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES)
 
 const pad2 = n => String(n).padStart(2, '0')
 
@@ -88,6 +109,8 @@ function sortByTsDesc(records) {
 module.exports = {
   EXPENSE_CATEGORIES,
   INCOME_CATEGORIES,
+  CATEGORY_ICON,
+  categoriesOf,
   toCents,
   formatCents,
   monthOf,
