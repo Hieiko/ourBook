@@ -1,4 +1,7 @@
 <image class="home-bg" src="/assets/bg/home.jpg" mode="aspectFill" aria-hidden="true" />
+<view class="home-nav" style="height: {{navHeight}}px; padding-top: {{statusBarHeight}}px;">
+  <text class="home-title">首页</text>
+</view>
 <view class="page">
   <!-- 插画预留位：备好图片后放到 assets/art/ 并在对应卡片内插入
        <image class="entry-art" src="/assets/art/ledger.png" mode="aspectFit" aria-hidden="true" /> -->
