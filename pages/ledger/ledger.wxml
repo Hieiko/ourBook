@@ -1,3 +1,5 @@
+<image class="ledger-bg" src="/assets/bg/home.jpg" mode="aspectFill" aria-hidden="true" />
+<view class="paper-veil" aria-hidden="true"></view>
 <nav-bar title="记账" back />
 <view class="page">
   <view class="month-bar">
@@ -9,8 +11,11 @@
       bindtap="shiftMonth"
       aria-role="button"
       aria-label="上一个月"
-    >‹</view>
-    <text class="month-text">{{monthLabel}}</text>
+    ><text class="month-arrow" aria-hidden="true">‹</text></view>
+    <view class="month-center">
+      <text class="month-kicker ink-title">月度流水</text>
+      <text class="month-text ink-title">{{monthLabel}}</text>
+    </view>
     <view
       class="month-nav pressable"
       hover-class="pressed"
@@ -19,7 +24,7 @@
       bindtap="shiftMonth"
       aria-role="button"
       aria-label="下一个月"
-    >›</view>
+    ><text class="month-arrow" aria-hidden="true">›</text></view>
   </view>
 
   <view
@@ -31,8 +36,12 @@
     aria-label="本月支出 {{summary.expense}} 元，收入 {{summary.income}} 元，查看分类汇总"
   >
     <view class="summary-main">
-      <text class="summary-label">本月结余</text>
+      <view class="summary-label-row">
+        <text class="seal" aria-hidden="true">记</text>
+        <text class="summary-label">本月结余</text>
+      </view>
       <text class="summary-balance">{{summary.balance}}</text>
+      <text class="summary-count">共 {{list.length}} 笔出入</text>
     </view>
     <view class="summary-side">
       <view class="summary-line">
@@ -50,6 +59,8 @@
   <view class="seg">
     <view
       class="seg-item {{type === 'expense' ? 'on' : ''}}"
+      hover-class="pressed"
+      hover-stay-time="80"
       data-value="expense"
       bindtap="onType"
       aria-role="radio"
@@ -57,6 +68,8 @@
     >支出</view>
     <view
       class="seg-item {{type === 'income' ? 'on' : ''}}"
+      hover-class="pressed"
+      hover-stay-time="80"
       data-value="income"
       bindtap="onType"
       aria-role="radio"
@@ -64,30 +77,45 @@
     >收入</view>
   </view>
 
-  <view class="grid {{type}}">
-    <view
-      wx:for="{{cells}}"
-      wx:key="name"
-      class="cell pressable"
-      hover-class="pressed"
-      hover-stay-time="80"
-      data-name="{{item.name}}"
-      bindtap="pick"
-      aria-role="button"
-      aria-label="记一笔{{item.name}}"
-    >
-      <view class="cell-tile"><view class="icon icon-lg {{item.icon}}" aria-hidden="true"></view></view>
-      <text class="cell-name">{{item.name}}</text>
+  <view class="category-panel">
+    <view class="section-head">
+      <view class="section-title-wrap">
+        <text class="seal" aria-hidden="true">{{type === 'expense' ? '出' : '入'}}</text>
+        <text class="section-title ink-title">{{type === 'expense' ? '支出一笔' : '收入一笔'}}</text>
+      </view>
+      <text class="section-hint">轻点分类</text>
+    </view>
+    <view class="grid {{type}}">
+      <view
+        wx:for="{{cells}}"
+        wx:key="name"
+        class="cell pressable"
+        hover-class="pressed"
+        hover-stay-time="80"
+        data-name="{{item.name}}"
+        bindtap="pick"
+        aria-role="button"
+        aria-label="记一笔{{item.name}}"
+      >
+        <view class="cell-tile"><view class="icon icon-lg {{item.icon}}" aria-hidden="true"></view></view>
+        <text class="cell-name">{{item.name}}</text>
+      </view>
     </view>
   </view>
 
-  <view class="group-header">本月记录 · {{list.length}} 笔</view>
-  <view class="group">
+  <view class="section-head list-head">
+    <view class="section-title-wrap">
+      <text class="seal" aria-hidden="true">账</text>
+      <text class="section-title ink-title">本月记录</text>
+    </view>
+    <text class="section-hint">{{list.length}} 笔</text>
+  </view>
+  <view class="group ledger-group">
     <view wx:if="{{!list.length}}" class="row row-empty">本月还没有记录</view>
     <view
       wx:for="{{list}}"
       wx:key="id"
-      class="row pressable"
+      class="row ledger-row pressable"
       hover-class="pressed"
       hover-stay-time="80"
       data-id="{{item.id}}"
@@ -111,7 +139,10 @@
 
     <view class="sheet-head">
       <text class="sheet-cancel pressable" hover-class="pressed" hover-stay-time="80" bindtap="closeSheet" aria-role="button">取消</text>
-      <text class="sheet-title">{{form.id ? '编辑记录' : form.category}}</text>
+      <view class="sheet-title-wrap">
+        <text class="seal" aria-hidden="true">记</text>
+        <text class="sheet-title ink-title">{{form.id ? '编辑记录' : form.category}}</text>
+      </view>
       <text class="sheet-done pressable" hover-class="pressed" hover-stay-time="80" bindtap="save" aria-role="button">保存</text>
     </view>
 
@@ -131,7 +162,7 @@
       </view>
     </view>
 
-    <view class="group">
+    <view class="group sheet-group">
       <view class="row">
         <text class="row-title">备注</text>
         <input

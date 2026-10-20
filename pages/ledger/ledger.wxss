@@ -1,42 +1,131 @@
-/* 记账页没有底栏，收掉 app.wxss 给 tab 页留的那截空白 */
-.page {
-  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+/* 记账页：宣纸远山为底，墨绿账页与朱印作点缀 */
+.ledger-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
+/* 只压一层很薄的暖白，保证文字清楚，又不把纸纹盖死 */
+.paper-veil {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: rgba(247, 246, 242, 0.22);
+  pointer-events: none;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  padding: 8rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 月份：左侧留白，中央书卷式月份 ---------- */
 .month-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: var(--gap-sm);
+  margin: 4rpx 0 20rpx;
 }
 
 .month-nav {
+  flex: none;
   width: 88rpx;
   height: 88rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 44rpx;
-  line-height: 1;
+  border: 1rpx solid rgba(79, 114, 97, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
   color: var(--tint);
 }
 
-.month-text {
-  min-width: 240rpx;
-  text-align: center;
-  font-size: 34rpx;
-  font-weight: 600;
+.month-arrow {
+  margin-top: -6rpx;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 52rpx;
+  line-height: 1;
 }
 
-/* ---------- 汇总卡：结余为主，收支为辅 ---------- */
-.summary {
+.month-center {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.month-kicker {
+  display: block;
+  font-size: 20rpx;
+  line-height: 28rpx;
+  letter-spacing: 8rpx;
+  color: var(--label-2);
+}
+
+.month-text {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 38rpx;
+  line-height: 48rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+/* ---------- 朱印：只做视觉锚点，不承担正文信息 ---------- */
+.seal {
+  flex: none;
+  width: 36rpx;
+  height: 36rpx;
   display: flex;
   align-items: center;
-  margin-bottom: var(--gap-md);
-  padding: 26rpx var(--gap-lg);
-  border: 1rpx solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--card);
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 4rpx;
+  background: var(--seal);
+  box-shadow: inset 0 0 0 2rpx rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 21rpx;
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+
+/* ---------- 汇总：深墨绿账页，结余是唯一主角 ---------- */
+.summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+  padding: 28rpx var(--gap-lg);
+  border: 1rpx solid rgba(248, 243, 232, 0.1);
+  border-radius: 24rpx;
+  background: #34483E;
+  box-shadow: 0 12rpx 30rpx rgba(43, 43, 43, 0.14);
+}
+
+/* 淡墨远山，压在卡片右下角 */
+.summary::after {
+  content: "";
+  position: absolute;
+  right: -34rpx;
+  bottom: -26rpx;
+  width: 360rpx;
+  height: 180rpx;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150' fill='none'%3E%3Cpath d='M-10 132C26 108 42 112 74 84c20-18 30-16 46 2 16 19 26 15 43-4 20-22 34-20 51 0 20 24 40 27 96 12' stroke='%23F8F3E8' stroke-width='1.1' opacity='.62'/%3E%3Cpath d='M22 146c34-20 60-19 90-42 21-16 34-13 49 4 14 17 27 14 43-3 19-20 34-18 51 2 13 15 27 17 55 10' stroke='%23F8F3E8' stroke-width='.8' opacity='.38'/%3E%3Ccircle cx='238' cy='34' r='18' stroke='%23F8F3E8' stroke-width='.8' opacity='.34'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.summary-main,
+.summary-side,
+.summary .chevron {
+  position: relative;
+  z-index: 1;
 }
 
 .summary-main {
@@ -44,23 +133,43 @@
   min-width: 0;
 }
 
+.summary-label-row {
+  display: flex;
+  align-items: center;
+}
+
 .summary-label {
-  display: block;
-  font-size: 26rpx;
-  line-height: 36rpx;
-  color: var(--label-2);
+  margin-left: 12rpx;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  letter-spacing: 2rpx;
+  color: #D9D4C7;
 }
 
 .summary-balance {
   display: block;
+  margin-top: 4rpx;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 56rpx;
+  line-height: 70rpx;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #F8F3E8;
+}
+
+.summary-count {
+  display: block;
   margin-top: 2rpx;
-  font-size: 54rpx;
-  line-height: 66rpx;
-  font-weight: 600;
+  font-size: 22rpx;
+  line-height: 30rpx;
+  color: #D9D4C7;
 }
 
 .summary-side {
   flex: none;
+  margin-left: 20rpx;
+  padding-left: 20rpx;
+  border-left: 1rpx solid rgba(248, 243, 232, 0.16);
   text-align: right;
 }
 
@@ -68,45 +177,103 @@
   display: flex;
   align-items: baseline;
   justify-content: flex-end;
-  font-size: 28rpx;
-  line-height: 42rpx;
+  font-size: 26rpx;
+  line-height: 38rpx;
 }
 
 .summary-key {
   margin-right: 12rpx;
-  color: var(--label-2);
+  color: #D9D4C7;
 }
 
-/* ---------- 支出 / 收入 切换 ---------- */
+.summary-side .amount-expense { color: #F4A69B; }
+.summary-side .amount-income { color: #A9D8BB; }
+.summary .chevron { margin-left: 12rpx; color: #D9D4C7; }
+
+/* ---------- 支出 / 收入 ---------- */
 .seg {
   display: flex;
-  margin-bottom: var(--gap-sm);
+  margin-bottom: 20rpx;
   padding: 4rpx;
-  border-radius: 18rpx;
-  background: var(--fill);
+  border: 1rpx solid rgba(79, 114, 97, 0.14);
+  border-radius: 16rpx;
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .seg-item {
+  position: relative;
   flex: 1;
-  min-height: 64rpx;
+  min-height: 72rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14rpx;
-  font-size: 30rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: var(--label-2);
 }
 
 .seg-item.on {
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 3rpx 8rpx rgba(43, 43, 43, 0.1);
+  box-shadow: 0 3rpx 10rpx rgba(43, 43, 43, 0.08);
 }
 
-/* ---------- icon 网格：一屏点选，点谁记谁 ---------- */
+.seg-item.on::after {
+  content: "";
+  position: absolute;
+  bottom: 12rpx;
+  left: 50%;
+  width: 28rpx;
+  height: 3rpx;
+  margin-left: -14rpx;
+  border-radius: 999rpx;
+  background: var(--tint);
+  opacity: 0.55;
+}
+
+/* ---------- 分类：一屏点选，纸色圆签 ---------- */
+.category-panel {
+  margin-bottom: 24rpx;
+  padding: 18rpx 12rpx 8rpx;
+  border: 1rpx solid rgba(79, 114, 97, 0.11);
+  border-radius: 24rpx;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow: 0 6rpx 20rpx rgba(43, 43, 43, 0.055);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rpx 12rpx;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.section-title {
+  margin-left: 12rpx;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.section-hint {
+  flex: none;
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  color: var(--label-2);
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: var(--gap-lg);
 }
 
 .cell {
@@ -114,41 +281,108 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18rpx 0;
+  padding: 12rpx 0 18rpx;
 }
 
 .cell-tile {
-  width: 128rpx;
-  height: 128rpx;
+  position: relative;
+  width: 116rpx;
+  height: 116rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1rpx solid rgba(79, 114, 97, 0.22);
   border-radius: 50%;
-  background: var(--tint-soft);
+  background: rgba(253, 251, 247, 0.88);
+  box-shadow: 0 4rpx 14rpx rgba(43, 43, 43, 0.05);
+}
+
+/* 第二道细线，像纸上压出的墨圈 */
+.cell-tile::after {
+  content: "";
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  bottom: 8rpx;
+  left: 8rpx;
+  border: 1rpx solid rgba(79, 114, 97, 0.09);
+  border-radius: 50%;
+}
+
+.cell-tile .icon {
+  position: relative;
+  z-index: 1;
 }
 
 .cell-name {
-  margin-top: 10rpx;
+  margin-top: 8rpx;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
   font-size: 26rpx;
   line-height: 34rpx;
   color: var(--label-2);
 }
 
 .grid.expense .icon { background-color: var(--tint); }
-.grid.income .cell-tile { background: rgba(53, 120, 79, 0.12); }
+.grid.income .cell-tile { background: rgba(246, 251, 247, 0.9); border-color: rgba(53, 120, 79, 0.2); }
 .grid.income .icon { background-color: var(--income); }
 
-/* 记录行：分类图标沿用圆形底 */
+/* ---------- 流水 ---------- */
+.list-head {
+  padding: 0 8rpx 10rpx;
+}
+
+.ledger-group {
+  margin-bottom: 0;
+  border: 1rpx solid rgba(79, 114, 97, 0.11);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 6rpx 20rpx rgba(43, 43, 43, 0.05);
+}
+
+.ledger-row {
+  min-height: 96rpx;
+  padding: 16rpx 24rpx;
+}
+
+.ledger-row + .ledger-row {
+  border-top-color: rgba(79, 114, 97, 0.12);
+}
+
+.ledger-row .entry-body { margin-left: 18rpx; }
+
+.ledger-row .entry-title {
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 32rpx;
+  line-height: 42rpx;
+}
+
+.ledger-row .entry-sub {
+  margin-top: 1rpx;
+  font-size: 24rpx;
+  line-height: 34rpx;
+}
+
+.ledger-row .amount {
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 34rpx;
+  font-variant-numeric: tabular-nums;
+}
+
 .tile {
+  border: 1rpx solid rgba(79, 114, 97, 0.1);
   border-radius: 50%;
 }
 
-.tile.expense { background: var(--tint-soft); }
+.tile.expense { background: rgba(79, 114, 97, 0.1); }
 .tile.expense .icon { background-color: var(--tint); }
-.tile.income { background: rgba(53, 120, 79, 0.12); }
+.tile.income { background: rgba(53, 120, 79, 0.1); border-color: rgba(53, 120, 79, 0.13); }
 .tile.income .icon { background-color: var(--income); }
 
-/* ---------- 金额弹层 ---------- */
+.row-empty {
+  min-height: 132rpx;
+  color: var(--label-2);
+}
+
+/* ---------- 金额弹层：一张掀起的宣纸 ---------- */
 .mask {
   position: fixed;
   top: 0;
@@ -158,7 +392,7 @@
   z-index: 100;
   display: flex;
   align-items: flex-end;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(30, 32, 29, 0.46);
 }
 
 .sheet {
@@ -167,33 +401,58 @@
   overflow-y: auto;
   box-sizing: border-box;
   padding: 8rpx 32rpx calc(32rpx + env(safe-area-inset-bottom));
-  background: var(--bg);
-  border-radius: 32rpx 32rpx 0 0;
+  border-top: 1rpx solid rgba(79, 114, 97, 0.18);
+  border-radius: 36rpx 36rpx 0 0;
+  background: #FBF8F0;
+  box-shadow: 0 -18rpx 44rpx rgba(43, 43, 43, 0.14);
 }
 
 .grabber {
   width: 72rpx;
-  height: 10rpx;
+  height: 8rpx;
   margin: 8rpx auto 0;
   border-radius: 999rpx;
-  background: var(--label-3);
+  background: rgba(138, 134, 124, 0.72);
 }
 
 .sheet-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 88rpx;
+  height: 96rpx;
 }
 
-.sheet-title { font-size: 34rpx; font-weight: 600; }
-.sheet-cancel { font-size: 34rpx; color: var(--tint); }
-.sheet-done { font-size: 34rpx; font-weight: 600; color: var(--tint); }
+.sheet-cancel,
+.sheet-done {
+  width: 96rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.sheet-cancel { color: var(--label-2); }
+.sheet-done { color: var(--tint); font-weight: 600; }
+
+.sheet-title-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-title {
+  margin-left: 10rpx;
+  font-size: 34rpx;
+  line-height: 44rpx;
+  font-weight: 700;
+}
 
 .amount-row {
   display: flex;
   align-items: center;
-  margin-bottom: var(--gap-md);
+  margin: 16rpx 0 24rpx;
 }
 
 .amount-card {
@@ -202,12 +461,14 @@
   display: flex;
   align-items: center;
   padding: 16rpx var(--gap-lg);
-  border-radius: var(--radius-group);
-  background: var(--card);
+  border: 1rpx solid rgba(79, 114, 97, 0.15);
+  border-radius: 18rpx;
+  background: rgba(255, 255, 255, 0.74);
 }
 
 .cny {
   margin-right: 12rpx;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
   font-size: 44rpx;
   line-height: 60rpx;
   font-weight: 600;
@@ -219,22 +480,35 @@
   flex: 1;
   min-width: 0;
   height: 88rpx;
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
   font-size: 64rpx;
   line-height: 88rpx;
   font-weight: 700;
+}
+
+.sheet-group {
+  margin-bottom: 0;
+  border: 1rpx solid rgba(79, 114, 97, 0.12);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.sheet-group .row-title {
+  font-family: "Songti SC", "STSongti-SC-Bold", "Noto Serif SC", serif;
+  font-size: 32rpx;
 }
 
 .field-input {
   flex: 1;
   min-width: 0;
   height: 48rpx;
-  font-size: 34rpx;
+  font-size: 32rpx;
   line-height: 48rpx;
   text-align: right;
 }
 
 .btn-delete {
-  margin-top: 8rpx;
-  background: rgba(176, 74, 62, 0.12);
+  margin-top: 24rpx;
+  border: 1rpx solid rgba(176, 74, 62, 0.12);
+  background: rgba(176, 74, 62, 0.08);
   color: var(--expense);
 }
