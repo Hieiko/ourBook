@@ -59,7 +59,6 @@ page {
 }
 
 .page {
-  min-height: 100vh;
   box-sizing: border-box;
   padding: 24rpx 32rpx 220rpx;
 }

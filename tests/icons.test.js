@@ -5,11 +5,14 @@ const fs = require('fs')
 const path = require('path')
 const calc = require('../utils/calc')
 
-const css = fs.readFileSync(path.join(__dirname, '..', 'app.wxss'), 'utf8')
+const root = path.join(__dirname, '..')
+const css = fs.readFileSync(path.join(root, 'app.wxss'), 'utf8')
+// 组件样式默认隔离，图标是单独一份，一起校验
+const svgCss = [css, fs.readFileSync(path.join(root, 'components/nav-bar/index.wxss'), 'utf8')].join('\n')
 let checks = 0
 
 // 每个 data-uri 都要能解码、标签配对、转义完整
-for (const [, payload] of css.matchAll(/url\("data:image\/svg\+xml,([^"]+)"\)/g)) {
+for (const [, payload] of svgCss.matchAll(/url\("data:image\/svg\+xml,([^"]+)"\)/g)) {
   assert.ok(!payload.includes('#') && !payload.includes('"'), `转义不完整: ${payload.slice(0, 60)}`)
   const svg = decodeURIComponent(payload)
   assert.ok(svg.startsWith('<svg') && svg.endsWith('</svg>'), `SVG 外壳损坏: ${svg.slice(0, 60)}`)

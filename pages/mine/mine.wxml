@@ -1,6 +1,5 @@
+<nav-bar title="我的" />
 <view class="page">
-  <view class="large-title">我的</view>
-
   <view class="group-header">我的记录</view>
   <view class="group">
     <view class="row pressable" hover-class="pressed" hover-stay-time="80" bindtap="goLedger" aria-role="button" aria-label="记账记录">

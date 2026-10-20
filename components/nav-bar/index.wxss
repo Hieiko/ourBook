@@ -1,0 +1,50 @@
+/* 组件默认样式隔离，.icon/.pressed 这些全局类进不来，这里自成一套 */
+:host {
+  display: block;
+}
+
+.nav {
+  position: relative;
+  z-index: 10;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--ink, #2B2B2B);
+}
+
+.back {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 120ms ease-out;
+}
+
+.back-pressed {
+  opacity: 0.5;
+}
+
+.back-icon {
+  width: 44rpx;
+  height: 44rpx;
+  background-color: var(--ink, #2B2B2B);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4.6 8.6 12 15 19.4'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4.6 8.6 12 15 19.4'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+}

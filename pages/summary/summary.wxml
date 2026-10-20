@@ -1,3 +1,4 @@
+<nav-bar title="分类汇总" back />
 <view class="page">
   <view class="group-header">{{monthLabel}} · 支出</view>
   <view class="group">

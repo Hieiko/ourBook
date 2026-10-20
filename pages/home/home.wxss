@@ -8,27 +8,9 @@
   z-index: 0;
 }
 
-/* 自定义标题栏：只占状态栏 + 44px，背景图从屏幕最顶端开始 */
-.home-nav {
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.home-title {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: var(--ink);
-}
-
 .page {
   position: relative;
   z-index: 1;
-  /* 标题栏已经占掉了状态栏高度，再按 100vh 撑高就会多出可滚动的空白 */
-  min-height: 0;
 }
 
 .entry-card {

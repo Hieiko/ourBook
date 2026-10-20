@@ -10,8 +10,8 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "家庭记账",
-    "navigationBarBackgroundColor": "#ffffff",
-    "backgroundColor": "#F5F6FA"
+    "navigationBarBackgroundColor": "#F7F6F2",
+    "backgroundColor": "#F7F6F2"
   },
   "tabBar": {
     "custom": true,

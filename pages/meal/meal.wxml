@@ -1,3 +1,4 @@
+<nav-bar title="用餐" back />
 <view class="page">
   <view class="placeholder">
     <view class="ph-icon"><view class="icon i-meal c-orange icon-lg" aria-hidden="true"></view></view>

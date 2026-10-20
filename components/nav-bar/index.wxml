@@ -1,0 +1,14 @@
+<view class="nav" style="padding-top: {{statusBarHeight}}px;">
+  <view
+    wx:if="{{back}}"
+    class="back"
+    hover-class="back-pressed"
+    hover-stay-time="80"
+    bindtap="goBack"
+    aria-role="button"
+    aria-label="返回"
+  >
+    <view class="back-icon" aria-hidden="true"></view>
+  </view>
+  <text class="title">{{title}}</text>
+</view>
