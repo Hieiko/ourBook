@@ -1,5 +1,10 @@
 // 纯计算逻辑：刻意不引用任何 wx API，这样才能直接跑 tests/calc.test.js
-const EXPENSE_CATEGORIES = ['餐饮', '买菜', '零食', '交通', '购物', '居家', '房租', '医疗', '教育', '娱乐', '人情', '其他']
+const EXPENSE_CATEGORIES = [
+  '餐饮', '买菜', '零食', '交通', '购物',
+  '居家', '房租', '医疗', '教育', '娱乐',
+  '人情', '缴费', '美容', '充值', '通讯',
+  '宠物', '旅行', '运动', '数码', '其他',
+]
 const INCOME_CATEGORIES = ['工资', '奖金', '红包', '其他']
 
 // 分类 -> 图标 class（图标本体在 app.wxss，蒙版上色）
@@ -15,6 +20,14 @@ const CATEGORY_ICON = {
   教育: 'i-book',
   娱乐: 'i-fun',
   人情: 'i-gift',
+  缴费: 'i-bill',
+  美容: 'i-beauty',
+  充值: 'i-topup',
+  通讯: 'i-phone',
+  宠物: 'i-pet',
+  旅行: 'i-travel',
+  运动: 'i-sport',
+  数码: 'i-digital',
   工资: 'i-salary',
   奖金: 'i-bonus',
   红包: 'i-redpacket',

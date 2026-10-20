@@ -12,6 +12,15 @@ const deep = (actual, expected, label) => {
   checks++
 }
 
+// 分类：常用支出要齐全，且不能重名
+eq(calc.EXPENSE_CATEGORIES.length, 20, '支出分类数量')
+deep(
+  calc.EXPENSE_CATEGORIES.slice(11, 19),
+  ['缴费', '美容', '充值', '通讯', '宠物', '旅行', '运动', '数码'],
+  '新增支出分类'
+)
+eq(new Set(calc.EXPENSE_CATEGORIES).size, calc.EXPENSE_CATEGORIES.length, '支出分类不重复')
+
 // 金额：字符串 -> 分，拒绝非法输入
 eq(calc.toCents('12.34'), 1234, '两位小数')
 eq(calc.toCents('12'), 1200, '整数')

@@ -174,6 +174,54 @@ page {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='8.4' width='17.2' height='4.2' rx='1.4'/%3E%3Cpath d='M5.4 12.6v6.4a1.6 1.6 0 0 0 1.6 1.6h10a1.6 1.6 0 0 0 1.6-1.6v-6.4'/%3E%3Cpath d='M12 8.4v12.2'/%3E%3Cpath d='M12 8.4C10.6 5.6 8.6 4.6 7.4 5.4c-1.2 1 0 3 4.6 3ZM12 8.4c1.4-2.8 3.4-3.8 4.6-3-.2 1-1 2.4-4.6 3Z'/%3E%3C/svg%3E");
 }
 
+/* 缴费：带波浪边的账单 */
+.i-bill {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.6h12v16.8l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3V3.6Z'/%3E%3Cpath d='M9 8h6M9 12h6M9 16h3'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.6h12v16.8l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3V3.6Z'/%3E%3Cpath d='M9 8h6M9 12h6M9 16h3'/%3E%3C/svg%3E");
+}
+
+/* 美容：口红 */
+.i-beauty {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10.6h6v9.8H9z'/%3E%3Cpath d='M10.2 10.6V7.4c0-.9.5-1.7 1.4-2.1L14.8 4v6.6'/%3E%3Cpath d='M9 14.2h6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10.6h6v9.8H9z'/%3E%3Cpath d='M10.2 10.6V7.4c0-.9.5-1.7 1.4-2.1L14.8 4v6.6'/%3E%3Cpath d='M9 14.2h6'/%3E%3C/svg%3E");
+}
+
+/* 充值：带加号的圆币 */
+.i-topup {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.2'/%3E%3Cpath d='M12 8.4v7.2M8.4 12h7.2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.2'/%3E%3Cpath d='M12 8.4v7.2M8.4 12h7.2'/%3E%3C/svg%3E");
+}
+
+/* 通讯：手机 + 信号弧 */
+.i-phone {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='7.2' y='3.2' width='9.6' height='17.6' rx='2.4'/%3E%3Cpath d='M10.6 18h2.8M4.4 8.2c-1 2.4-1 5.2 0 7.6M2.2 6.4c-1.6 3.6-1.6 7.6 0 11.2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='7.2' y='3.2' width='9.6' height='17.6' rx='2.4'/%3E%3Cpath d='M10.6 18h2.8M4.4 8.2c-1 2.4-1 5.2 0 7.6M2.2 6.4c-1.6 3.6-1.6 7.6 0 11.2'/%3E%3C/svg%3E");
+}
+
+/* 宠物：爪印 */
+.i-pet {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7.2' cy='8.2' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='10.4' cy='5.8' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='14.2' cy='5.8' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='17.2' cy='8.4' r='1.45' fill='%23000' stroke='none'/%3E%3Cpath d='M12 10.6c-3.1 0-5.1 2.2-5.1 4.3 0 1.8 1.5 2.9 3 2.4 1.4-.5 2.8-.5 4.2 0 1.5.5 3-.6 3-2.4 0-2.1-2-4.3-5.1-4.3Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7.2' cy='8.2' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='10.4' cy='5.8' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='14.2' cy='5.8' r='1.45' fill='%23000' stroke='none'/%3E%3Ccircle cx='17.2' cy='8.4' r='1.45' fill='%23000' stroke='none'/%3E%3Cpath d='M12 10.6c-3.1 0-5.1 2.2-5.1 4.3 0 1.8 1.5 2.9 3 2.4 1.4-.5 2.8-.5 4.2 0 1.5.5 3-.6 3-2.4 0-2.1-2-4.3-5.1-4.3Z'/%3E%3C/svg%3E");
+}
+
+/* 旅行：行李箱 */
+.i-travel {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.6' y='8' width='16.8' height='11.2' rx='2.4'/%3E%3Cpath d='M9 8V6.2c0-.9.7-1.6 1.6-1.6h2.8c.9 0 1.6.7 1.6 1.6V8M8.6 8v11.2M15.4 8v11.2M3.6 12.2h16.8'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.6' y='8' width='16.8' height='11.2' rx='2.4'/%3E%3Cpath d='M9 8V6.2c0-.9.7-1.6 1.6-1.6h2.8c.9 0 1.6.7 1.6 1.6V8M8.6 8v11.2M15.4 8v11.2M3.6 12.2h16.8'/%3E%3C/svg%3E");
+}
+
+/* 运动：哑铃 */
+.i-sport {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.2v5.6M7.6 7v10M16.4 7v10M20 9.2v5.6M7.6 12h8.8'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.2v5.6M7.6 7v10M16.4 7v10M20 9.2v5.6M7.6 12h8.8'/%3E%3C/svg%3E");
+}
+
+/* 数码：显示器 */
+.i-digital {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='5.2' width='16' height='10.4' rx='2'/%3E%3Cpath d='M2.4 19h19.2M4.2 15.6h15.6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='5.2' width='16' height='10.4' rx='2'/%3E%3Cpath d='M2.4 19h19.2M4.2 15.6h15.6'/%3E%3C/svg%3E");
+}
+
 /* 工资：钞票 */
 .i-salary {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.8' y='6.4' width='18.4' height='11.2' rx='2.4'/%3E%3Ccircle cx='12' cy='12' r='2.6'/%3E%3Cpath d='M6.2 12h.01M17.8 12h.01'/%3E%3C/svg%3E");
